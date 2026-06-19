@@ -31,6 +31,25 @@ const team = [
   }
 ]
 
+// ========== 价值观 ==========
+const values = [
+  {
+    title: '古今融合',
+    description: '以现代科技为器，以传统智慧为魂。用 AI、数据科学的方式让千年玄学焕发新的生命力。',
+    icon: 'i-lucide-orbit',
+  },
+  {
+    title: '知行合一',
+    description: '命理不是宿命论。我们强调认识自己、改善自己——知命而不认命，顺势而为。',
+    icon: 'i-lucide-lightbulb',
+  },
+  {
+    title: '用户至上',
+    description: '每一个命盘背后都是一个真实的人。隐私保护、信息准确、服务用心——这是我们的底线。',
+    icon: 'i-lucide-heart',
+  },
+]
+
 const milestones = [
   { year: '2024', title: 'Zen Oracle 诞生', description: '一群热爱东方玄学的技术人与命理师走到一起，决定用科技让古老智慧触手可及。' },
   { year: '2025 Q1', title: 'AI 命理引擎上线', description: '历时 6 个月训练，AI 八字排盘与解读引擎正式发布，准确率达 92%。' },
@@ -93,6 +112,44 @@ const milestones = [
           </template>
           <p class="text-sm text-muted text-center">{{ person.description }}</p>
         </UCard>
+      </div>
+    </UPageSection>
+
+    <!-- ====== 价值观 ====== -->
+    <UPageSection
+      title="我们的信念"
+      description="这三条核心价值观，是 Zen Oracle 每一次决策的指南针。"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <UCard v-for="value in values" :key="value.title">
+          <div class="text-center py-4">
+            <UIcon
+              :name="value.icon"
+              class="w-10 h-10 text-[var(--ui-primary)] mx-auto mb-3"
+            />
+            <h3 class="font-semibold mb-2">{{ value.title }}</h3>
+            <p class="text-sm text-muted">{{ value.description }}</p>
+          </div>
+        </UCard>
+      </div>
+    </UPageSection>
+
+    <!-- ====== 底部 CTA ====== -->
+    <UPageSection>
+      <div class="text-center max-w-xl mx-auto">
+        <h2 class="text-2xl font-bold mb-3">想加入我们的修行之路？</h2>
+        <p class="text-muted mb-6">
+          我们一直在寻找对玄学有热情、对技术有追求的同道中人。
+        </p>
+        <div class="flex justify-center gap-3">
+          <UButton label="联系我们" color="primary" size="lg" to="/contact" />
+          <UButton
+            label="探索文档"
+            variant="outline"
+            size="lg"
+            to="/docs"
+          />
+        </div>
       </div>
     </UPageSection>
   </UContainer>

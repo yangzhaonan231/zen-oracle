@@ -21,6 +21,14 @@
       to: '/chat',
       icon: 'i-lucide-messages-square'
     }, {
+      label: '联系',
+      to: '/contact',
+      icon: 'i-lucide-mail'
+    }, {
+      label: '演练场',
+      to: '/playground',
+      icon: 'i-lucide-flask-conical'
+    }, {
       label: '关于',
       to: '/about',
       icon: 'i-lucide-info'
@@ -54,6 +62,14 @@
       label: 'AI 玄学助手',
       to: '/chat',
       icon: 'i-lucide-messages-square'
+    }, {
+      label: '联系我们',
+      to: '/contact',
+      icon: 'i-lucide-mail'
+    }, {
+      label: '组件演练场',
+      to: '/playground',
+      icon: 'i-lucide-flask-conical'
     }, {
       label: '更新日志',
       to: '/changelog',

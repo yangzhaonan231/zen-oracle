@@ -53,5 +53,8 @@ useSeoMeta({
         </p>
       </template>
     </UFooter>
+
+    <!-- Toast 通知渲染位置 —— useToast() 的弹窗在这里显示 -->
+    <UToast />
   </UApp>
 </template>
