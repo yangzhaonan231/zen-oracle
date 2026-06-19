@@ -1,4 +1,3 @@
 {
-  "framework": "nuxt",
-  "nodeVersion": "22.x"
+  "framework": "nuxt"
 }
