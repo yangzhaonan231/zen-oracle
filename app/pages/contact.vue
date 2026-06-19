@@ -40,27 +40,38 @@ const canSubmit = computed(() => {
 // ========== 方法 ==========
 const toast = useToast()
 
-function submitForm() {
+// 动手5：$fetch 调用真实后端 API（替换原来的模拟逻辑）
+async function submitForm() {
   if (!canSubmit.value) return
 
-  // 模拟提交（70% 成功率）
-  const success = Math.random() > 0.3
+  try {
+    const response = await $fetch<{ success: boolean; message: string }>(
+      '/api/submit-form',
+      {
+        method: 'POST',
+        body: {
+          name: form.name,
+          email: form.email,
+          topic: form.topic,
+          message: form.message,
+        },
+      }
+    )
 
-  if (success) {
     showSuccess.value = true
     toast.add({
       title: '提交成功 🙏',
-      description: '我们会在 24 小时内回复你，请留意邮箱',
+      description: response.message,
       color: 'success',
       icon: 'i-lucide-check-circle',
       duration: 5000,
     })
-  } else {
-    errorMessage.value = '服务器繁忙，请稍后重试'
+  } catch (error: any) {
+    errorMessage.value = error?.data?.message || '服务器繁忙，请稍后重试'
     showError.value = true
     toast.add({
       title: '提交失败',
-      description: '网络连接异常，请稍后重试',
+      description: errorMessage.value,
       color: 'error',
       icon: 'i-lucide-alert-circle',
       duration: 5000,

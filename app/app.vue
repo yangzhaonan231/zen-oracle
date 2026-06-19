@@ -1,4 +1,8 @@
 <script setup>
+// 动手2：从环境变量读取站点名称（useRuntimeConfig）
+const config = useRuntimeConfig()
+const siteName = config.public.siteName
+
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
@@ -11,7 +15,7 @@ useHead({
   }
 })
 
-const title = 'Zen Oracle — 东方玄学与现代科学的交汇'
+const title = `${siteName} — 东方玄学与现代科学的交汇`
 const description = '融合八字命理、堪舆风水、奇门遁甲与脑神经科学，探索东方智慧与现代科学的交汇点。'
 
 useSeoMeta({
@@ -49,7 +53,7 @@ useSeoMeta({
     <UFooter>
       <template #left>
         <p class="text-sm text-muted">
-          Zen Oracle © {{ new Date().getFullYear() }} — 探索命运，洞见未来
+          {{ siteName }} © {{ new Date().getFullYear() }} — 探索命运，洞见未来
         </p>
       </template>
     </UFooter>
