@@ -4,10 +4,9 @@
 <template>
   <div>
     <!-- ===== Hero 区域 ===== -->
-    <!-- 动手3：Preview 部署测试标记 -->
     <UPageHero
       title="Zen Oracle"
-      description="融合八字命理、堪舆风水、奇门遁甲与脑神经科学，以东方千年智慧为根基、现代科学为佐证，探索身心平衡与命运之道。— Preview 测试"
+      description="融合八字命理、堪舆风水、奇门遁甲与脑神经科学，以东方千年智慧为根基、现代科学为佐证，探索身心平衡与命运之道。"
       :links="[{
         label: '开始探索',
         to: '/#features',
