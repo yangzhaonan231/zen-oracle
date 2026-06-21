@@ -3,6 +3,9 @@
 const config = useRuntimeConfig()
 const siteName = config.public.siteName
 
+// 认证状态
+const { user, logout } = useAuth()
+
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
@@ -40,7 +43,43 @@ useSeoMeta({
       </template>
 
       <template #right>
-        <UColorModeButton />
+        <div class="flex items-center gap-2">
+          <!-- 已登录：显示仪表盘 + 退出 -->
+          <template v-if="user">
+            <UButton
+              label="仪表盘"
+              to="/dashboard"
+              size="sm"
+              variant="ghost"
+              icon="i-lucide-layout-dashboard"
+              class="hidden sm:flex"
+            />
+            <UButton
+              label="退出"
+              size="sm"
+              variant="ghost"
+              color="neutral"
+              icon="i-lucide-log-out"
+              @click="logout()"
+              class="hidden sm:flex"
+            />
+            <UAvatar
+              :alt="user.name"
+              size="sm"
+              class="cursor-pointer"
+            />
+          </template>
+          <!-- 未登录：显示登录按钮 -->
+          <UButton
+            v-else
+            label="登录"
+            to="/login"
+            size="sm"
+            variant="subtle"
+            icon="i-lucide-log-in"
+          />
+          <UColorModeButton />
+        </div>
       </template>
     </UHeader>
 

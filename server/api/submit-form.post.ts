@@ -1,5 +1,6 @@
 // server/api/submit-form.post.ts
-// 动手7：接入 Vercel KV 存储联系表单数据
+// 联系表单提交 → Drizzle ORM 数据库
+import { contacts } from '../db/schema'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -15,23 +16,18 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: '请输入有效的邮箱地址' })
   }
 
-  // 生成唯一 ID
-  const id = `contact:${Date.now()}:${Math.random().toString(36).slice(2, 8)}`
-
-  const contactData = {
+  // 插入数据库（db 由 @nuxthub/core 自动注入）
+  await db.insert(contacts).values({
     name: body.name,
     email: body.email,
-    topic: body.topic || '',
+    company: body.company || body.topic || '',
+    plan: body.plan || '',
     message: body.message,
-    createdAt: new Date().toISOString(),
-  }
-
-  // 使用共享存储（本地内存 / Vercel KV 自动切换）
-  await saveContact(id, contactData)
+    createdAt: new Date()
+  })
 
   return {
     success: true,
-    message: `感谢 ${body.name}，我们会在 24 小时内回复到 ${body.email}`,
-    id,
+    message: `感谢 ${body.name}，我们会尽快回复你！`
   }
 })

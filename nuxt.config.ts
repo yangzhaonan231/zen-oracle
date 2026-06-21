@@ -2,8 +2,15 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@nuxthub/core'
   ],
+
+  hub: {
+    db: 'sqlite',
+    kv: true,
+    blob: true
+  },
 
   devtools: {
     enabled: true
