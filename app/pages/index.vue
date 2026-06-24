@@ -289,6 +289,17 @@
 <!-- 区域二：<script setup> — 页面逻辑 (JS/TS)     -->
 <!-- ============================================   -->
 <script setup lang="ts">
+// ====== SEO (Day 8) ======
+useSeoMeta({
+  title: 'Zen Oracle — 东方玄学与现代科学的交汇',
+  description: '融合八字命理、堪舆风水、奇门遁甲与脑神经科学，以东方千年智慧为根基、现代科学为佐证，探索身心平衡与命运之道。',
+  ogTitle: 'Zen Oracle — 东方玄学与现代科学',
+  ogDescription: '融合八字命理、堪舆风水、奇门遁甲与脑神经科学，探索命运与身心平衡之道。',
+  ogImage: 'https://zen-oracle.vercel.app/logo.jpg',
+  ogUrl: 'https://zen-oracle.vercel.app',
+  twitterCard: 'summary_large_image',
+})
+
 // ☐2：ref() 创建响应式变量——值变了，页面自动更新
 //      ⚠️ 在 JS 里读写需要 .value，在模板里直接写变量名
 

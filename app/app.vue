@@ -29,6 +29,37 @@ useSeoMeta({
   ogImage: '/logo.jpg',
   twitterCard: 'summary_large_image'
 })
+
+// ====== Day 8: 页面访问统计 ======
+const route = useRoute()
+watch(() => route.fullPath, (path) => {
+  if (import.meta.client) {
+    fetch('/api/track-pageview', {
+      method: 'POST',
+      body: JSON.stringify({
+        path,
+        referrer: document.referrer,
+        userAgent: navigator.userAgent,
+      }),
+    }).catch(() => {}) // 静默失败
+  }
+}, { immediate: true })
+
+// ====== Day 8: 全局前端错误捕获 ======
+onErrorCaptured((err) => {
+  if (import.meta.client) {
+    fetch('/api/log-error', {
+      method: 'POST',
+      body: JSON.stringify({
+        message: err.message,
+        stack: err.stack,
+        page: route.fullPath,
+      }),
+    }).catch(() => {})
+  }
+  // 不阻止错误继续传播
+  return false
+})
 </script>
 
 <template>

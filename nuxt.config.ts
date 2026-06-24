@@ -3,13 +3,27 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxt/ui',
-    '@nuxthub/core'
+    '@nuxthub/core',
+    '@nuxtjs/seo'
   ],
 
   hub: {
     db: 'sqlite',
     kv: true,
     blob: true
+  },
+
+  // ====== SEO 全局配置 (Day 8) ======
+  site: {
+    name: 'Zen Oracle',
+    description: '融合八字命理、堪舆风水、奇门遁甲与脑神经科学，探索东方智慧与现代科学的交汇点。',
+    url: 'https://zen-oracle.vercel.app',
+    defaultLocale: 'zh-CN',
+  },
+
+  // OG Image: 使用静态图片，禁用动态渲染
+  ogImage: {
+    enabled: false,
   },
 
   devtools: {
@@ -24,12 +38,11 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2025-01-15',
 
-  // 环境变量声明（动手2）
+  // 环境变量声明
   // 命名规则：驼峰 apiKey ← 环境变量 NUXT_API_KEY
   runtimeConfig: {
     // 服务端专用（不会暴露给浏览器）
-    // apiKey: '',
-    // resendKey: '',
+    resendApiKey: '', // NUXT_RESEND_API_KEY — Day 8 邮件通知
 
     // 客户端也能用（须 NUXT_PUBLIC_ 前缀）
     public: {
