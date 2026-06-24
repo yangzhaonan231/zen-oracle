@@ -1,6 +1,6 @@
 // server/utils/contactStore.ts
 // 多后端共享存储：Supabase Postgres KV → Redis KV → 内存回退
-import { createClient, type SupabaseClient } from '@supabase/supabase-js'
+import { getSupabaseAdmin } from './supabase'
 
 // ============================================================
 // 内存回退层（开发环境 / 所有 KV 不可用时）
@@ -25,32 +25,10 @@ export function hasKV() {
 }
 
 // ============================================================
-// Supabase 客户端（单例）
+// Supabase 客户端（使用共享单例）
 // ============================================================
-let supabaseClient: SupabaseClient | null = null
-let supabaseChecked = false
-let supabaseReady = false
-
-function getSupabase(): SupabaseClient | null {
-  if (supabaseChecked) return supabaseReady ? supabaseClient : null
-  supabaseChecked = true
-
-  const url = process.env.KV_SUPABASE_URL
-  const key = process.env.KV_SUPABASE_SERVICE_ROLE_KEY
-
-  if (!url || !key) return null
-
-  try {
-    supabaseClient = createClient(url, key, {
-      auth: { autoRefreshToken: false, persistSession: false }
-    })
-    supabaseReady = true
-    console.log('✅ [KV] 存储模式: Supabase Postgres KV')
-    return supabaseClient
-  } catch (err) {
-    console.warn('⚠️ [KV] Supabase 客户端初始化失败:', err)
-    return null
-  }
+function getSupabase() {
+  return getSupabaseAdmin()
 }
 
 // ============================================================
