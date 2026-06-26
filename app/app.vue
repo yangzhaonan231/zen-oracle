@@ -8,7 +8,8 @@ const { user, logout } = useAuth()
 
 useHead({
   meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'google-site-verification', content: 'A285K1EsuE73M5-_Pjv7EpPSyPZFYODUidnjUFO8E74' }
   ],
   link: [
     { rel: 'icon', href: '/logo.jpg' }
