@@ -43,6 +43,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // 服务端专用（不会暴露给浏览器）
     resendApiKey: '', // NUXT_RESEND_API_KEY — Day 8 邮件通知
+    lemonsqueezyApiKey: '', // NUXT_LEMONSQUEEZY_API_KEY — Day 9 Lemon Squeezy 支付
+    lemonsqueezyWebhookSecret: '', // NUXT_LEMONSQUEEZY_WEBHOOK_SECRET — Day 9 Webhook 签名验证
 
     // 客户端也能用（须 NUXT_PUBLIC_ 前缀）
     public: {

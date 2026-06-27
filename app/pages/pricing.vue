@@ -4,6 +4,12 @@ useSeoMeta({
   description: '选择适合你的命理探索方案，从免费入门到大师深度服务，总有一款适合你。'
 })
 
+// ========== Lemon Squeezy 支付链接（Day 9） ==========
+const paymentLinks = {
+  pro: 'https://zen-oracle.lemonsqueezy.com/checkout/buy/d644377f-9721-432d-bba9-62b349e846ed',
+  master: 'https://zen-oracle.lemonsqueezy.com/checkout/buy/bf58e520-ef18-410c-90a9-ba4f8d444b2b',
+}
+
 // ========== 定价方案数据 ==========
 const plans = ref([
   {
@@ -20,10 +26,12 @@ const plans = ref([
       'AI 助手对话（每日 5 次）'
     ],
     cta: '免费开始',
+    link: '/register',
+    external: false,
   },
   {
     name: '进阶修行',
-    price: '¥99',
+    price: '¥998',
     period: '/月',
     description: '适合系统学习命理的修行者',
     featured: true,  // ← 高亮推荐
@@ -38,10 +46,12 @@ const plans = ref([
       '邮件优先支持'
     ],
     cta: '开始 14 天免费试用',
+    link: paymentLinks.pro,
+    external: true,
   },
   {
     name: '大师传承',
-    price: '¥299',
+    price: '¥3998',
     period: '/月',
     description: '适合追求深度命理指导的求道者',
     featured: false,
@@ -55,7 +65,9 @@ const plans = ref([
       '优先体验新功能',
       'VIP 社群准入'
     ],
-    cta: '联系大师',
+    cta: '立即订阅',
+    link: paymentLinks.master,
+    external: true,
   }
 ])
 
@@ -67,7 +79,7 @@ const faqItems = ref([
   },
   {
     label: '支持哪些支付方式？',
-    content: '我们支持支付宝、微信支付，以及 Visa 和 MasterCard。大师传承方案还支持银行转账。',
+    content: '我们通过 Lemon Squeezy 处理支付，支持 Visa、MasterCard、American Express 等国际信用卡，以及 PayPal。',
   },
   {
     label: '有免费试用期吗？',
@@ -90,16 +102,11 @@ function scrollToPlans() {
 }
 const toast = useToast()
 
-// ☐ 页面跳转三种方式之一：navigateTo() —— JS 里编程式导航
+// Day 9: 演示按钮仍用 Toast 占位
 function handleCTA(planName: string) {
-  if (planName === '大师传承') {
-    navigateTo('/contact')
-    return
-  }
-  // Toast 操作反馈
   toast.add({
     title: `你选择了「${planName}」`,
-    description: '后续将接入支付流程，敬请期待',
+    description: '预约演示功能即将上线',
     color: 'info',
     icon: 'i-lucide-sparkles',
     duration: 4000,
@@ -186,7 +193,8 @@ function handleCTA(planName: string) {
               :variant="plan.featured ? 'solid' : 'outline'"
               block
               size="lg"
-              @click="handleCTA(plan.name)"
+              :to="plan.link"
+              :external="plan.external"
             />
           </template>
         </UCard>
@@ -194,7 +202,7 @@ function handleCTA(planName: string) {
 
       <!-- 退款说明 -->
       <p class="text-center mt-8 text-sm text-muted">
-        所有方案均支持 7 天无理由退款 · 随时升级或降级 · 支持支付宝/微信支付
+        所有方案均支持 7 天无理由退款 · 随时升级或降级 · 国际信用卡 / PayPal 安全支付
       </p>
     </UPageSection>
 
