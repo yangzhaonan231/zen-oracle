@@ -79,6 +79,7 @@ export default defineEventHandler(async (event) => {
   // 5. 处理订单创建事件（新订阅付款）
   if (eventName === 'order_created') {
     const productName = attributes.first_order_item?.product_name
+      || attributes.first_order_item?.variant_name
       || attributes.product_name
       || ''
 
